@@ -1,0 +1,10 @@
+---
+- hosts: all
+  tasks:
+    - name: copy index.html
+      ansible.builtin.copy:
+        dest: "/home/ansible-worker/www/index.html"
+        src: index.html
+        owner: ansible-worker
+        group: ansible-worker
+      become: true

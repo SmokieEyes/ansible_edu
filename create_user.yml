@@ -1,0 +1,9 @@
+---
+- hosts: all
+  tasks:
+    - name: create user
+      ansible.builtin.user:
+        name: ansible-worker
+        groups: sudo
+        generate_ssh_key: true
+      become: true

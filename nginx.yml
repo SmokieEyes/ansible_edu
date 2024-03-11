@@ -1,0 +1,39 @@
+---
+- hosts: all
+  vars:
+    nginx_avail: /etc/nginx/sites-available
+    nginx_enabled: /etc/nginx/sites-enabled
+  tasks:
+  - name: nginx install
+    ansible.builtin.apt:
+      name: nginx
+      state: present
+    become: true
+
+  - name: copy nginx configuration
+    ansible.builtin.copy:
+      dest: "{{nginx_avail}}/ansible.iphilka.ru.conf"
+      src: ansible.iphilka.ru.conf
+      owner: root
+      group: root
+      mode: 0755
+    become: true  
+
+  - name: site enabling
+    file:
+      src: "{{nginx_avail}}/ansible.iphilka.ru.conf"
+      dest: "{{nginx_enabled}}/ansible.iphilka.ru.conf"
+      state: link
+    become: true  
+
+  - name: default site disabling
+    file:
+      path: "{{nginx_enabled}}/default"
+      state: absent
+    become: true  
+
+  - name: restart nginx
+    ansible.builtin.systemd_service:
+      name: nginx
+      state: restarted
+    become: true

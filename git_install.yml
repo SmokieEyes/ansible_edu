@@ -1,0 +1,15 @@
+---
+- hosts: all
+  tasks:
+  - name: git install
+    ansible.builtin.apt:
+        name: git
+        state: present
+        update_cache: yes
+    become: true
+
+  - name: copy keys
+    ansible.builtin.copy:
+      dest: "/home/ansible-worker/.ssh/"
+      src: "ssh_keys/"
+    become: true

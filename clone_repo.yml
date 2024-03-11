@@ -1,0 +1,8 @@
+---
+- hosts: all
+  tasks:
+    - name: clone repository to worker_root
+      ansible.builtin.git:
+        repo: https://github.com/iphilka/stud-template
+        dest: "/home/ansible-worker/www"
+      become: true

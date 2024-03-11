@@ -1,0 +1,5 @@
+ansible-playbook create_user.yml -i hosts.ini -u iphilka
+ansible-playbook git_install.yml -i hosts.ini -u iphilka
+ansible-playbook clone_repo.yml -i hosts.ini -u iphilka
+ansible-playbook copy_index.yml -i hosts.ini -u iphilka
+ansible-playbook nginx.yml -i hosts.ini -u iphilka
